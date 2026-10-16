@@ -1,0 +1,68 @@
+{
+  "manifest_version": 3,
+  "name": "Lovable ∞",
+  "version": "19.7",
+  "description": "Extensão premium com validação de licença, modo plano e automação inteligente.",
+  "permissions": ["storage", "activeTab", "scripting", "tabs", "sidePanel", "webRequest", "cookies"],
+  "host_permissions": [
+    "https://*.lovable.dev/*",
+    "https://api.lovable.dev/*",
+    "https://lovable.dev/*",
+    "https://*.lovable.app/*",
+    "https://api.lovable.app/*",
+    "https://lovable.app/*",
+    "https://cvbgrjauqjawrsyknhyj.supabase.co/*",
+    "https://dwpuqewnfibeldegvimp.supabase.co/*",
+    "https://hckncgrfhedoswsdkyni.supabase.co/*",
+    "https://storage.googleapis.com/*",
+    "https://lovable-api.com/*",
+    "https://identitytoolkit.googleapis.com/*",
+    "https://*.lovable-api.com/*"
+  ],
+  "action": {
+    "default_icon": { "16": "icon.png", "48": "icon.png", "128": "icon.png" },
+    "default_title": "Lovable ∞"
+  },
+  "icons": { "16": "icon.png", "48": "icon.png", "128": "icon.png" },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "background": { "service_worker": "background.js" },
+  "web_accessible_resources": [
+    {
+      "resources": ["icon.png"],
+      "matches": [
+        "https://*.lovable.dev/*",
+        "https://lovable.dev/*"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.lovable.dev/*",
+        "https://lovable.dev/*"
+      ],
+      "js": ["castle-capture.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://*.lovable.dev/*",
+        "https://lovable.dev/*"
+      ],
+      "js": ["pageHook.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://*.lovable.dev/*",
+        "https://lovable.dev/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
